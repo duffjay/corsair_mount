@@ -62,6 +62,9 @@ difference () {
     translate([base_length/2, base_width/2 + 3, 12])
     rotate([90,0,0])
     cylinder(r =  mating_washer_dia/2, h = 1, center = true);
+    
+    translate([base_length/2, base_width/2 + 3, 12 + 22/2])
+    cube([mating_washer_dia, 1, 22], center = true);
 
     }
 }
