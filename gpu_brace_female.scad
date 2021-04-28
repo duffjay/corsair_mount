@@ -5,7 +5,11 @@ include <serrated45_plane.scad>;
 // printing - solid
 // precision - 0.06
 
-
+// *** TODO ***
+// mount_1_cl == mate_1_cl
+// mount_2_cl == mate_2_cl
+// make the mount (different file) < 10
+// - screw is only 10 mm long
 
 base_thickness = 4;
 

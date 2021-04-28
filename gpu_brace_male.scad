@@ -1,28 +1,37 @@
 include <serrated45_plane.scad>;
 
-// GPU brace - Male
-// M6 screws
-// 
-// printing
-// - 0.1 precision, gradual infill - does not work
-//   0.06 precision, 80% infile - 
-
-
-// GPU is about 49mm above the deck
-// base is 36 + 4 = 40 mm
-// mating holes:
-// - 18 mm
-// - 36 mm
+// GPU brace - Female
+//           - Bottom half
+// printing - solid
+// precision - 0.06
 
 
 
-male_width = 16;
-base_height = 34;
 base_thickness = 4;
-// flat base
 
-// M4 mounting 
-mating_screw_dia = ;
+male_x = 16;
+male_y = 4;
+male_z = 34 + base_thickness;    // add 4mm to go through the base
+
+flange_x = 2;
+flange_y = 8;
+flange_z = male_z;
+
+// mounting to base
+mounting_screw_dia = 2;
+mounting_screw_length = 10;
+mounting_washer_dia = 5;
+mounting_screw_head_dia = 4;
+
+// M4 mating - serration 
+mating_screw_dia = 4;
+mating_screw_pilot = 3.3;
+mating_washer_dia = 9;
+
+// slot
+slot = 2;
+mate_1_cl = 12 - slot;
+mate_2_cl = 28 + slot;
 
 $fn = 50;
 
@@ -34,34 +43,42 @@ difference () {
 
         
         // flanges
-        translate([base_length/2,0,0])
-        cube([2,8,34], center = true);
-        
-        translate([base_length/2,0,0])
-        cube([2,8,34], center = true);
+
         
         // center
 
-        cube([18,4,34], center = true);        
+        cube([male_x,male_y, male_z], center = true);        
         
         // serration
-        translate([base_length/2, base_width/2 - 1, base_thickness])
+        translate([0, -male_y/2, -male_z/2 + base_thickness + 6])
         rotate([180,-90,0])
-        serrated45_plane(0.5, 48, 16);
+        serrated45_plane(0.5, 39, male_x);
         }
     }
     {
 
-        
-
-    translate([base_length/2, base_width/2, 32])
+    // serrated mating holes
+    translate([0, male_y/2 - 3, -male_z/2 + base_thickness + mate_1_cl])
     rotate([90,0,0])
     cylinder(r = mating_screw_dia/2, h = 6, center = true);
         
-    translate([base_length/2, base_width/2, 18])
+    translate([0, male_y/2 - 3, -male_z/2 + base_thickness + mate_2_cl])
     rotate([90,0,0])
-    cylinder(r = mating_screw_dia/2, h = 6, center = true);
+    cylinder(r = mating_screw_dia /2, h = 6, center = true);
     
 
+        
+    // slot
+    translate([0, male_y/2 - 3, -male_z/2 + base_thickness + (mate_2_cl - mate_1_cl)/2 + mate_1_cl])
+    cube([mating_screw_dia, male_y + 2, mate_2_cl - mate_1_cl], center = true);        
+        
+    // mounting screws to base
+    translate([-male_x/4, male_y/2 - 3, -male_z/2 + base_thickness + 2])
+    rotate([90,0,0])
+    cylinder(r = mounting_screw_dia/2, h = 6, center = true);
+        
+    translate([male_x/4, male_y/2 - 3, -male_z/2 + base_thickness + 2])
+    rotate([90,0,0])
+    cylinder(r = mounting_screw_dia/2, h = 6, center = true);    
     }
 }
