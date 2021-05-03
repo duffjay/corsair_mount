@@ -31,8 +31,8 @@ mounting_screw_head_dia = 4;
 mating_screw_dia = 4;
 mating_screw_pilot = 3.3;
 
-mount_1_cl = 12;
-mount_2_cl = 28;
+mount_1_cl = 14;
+mount_2_cl = 26;
 
 $fn = 50;
 
@@ -55,9 +55,9 @@ difference () {
         cube([male_x,male_y, male_z], center = true);        
         
         // serration
-        translate([0, -male_y/2, -male_z/2 + base_thickness + 6])
-        rotate([180,-90,0])
-        serrated45_plane(0.5, 39, male_x);
+        // translate([0, -male_y/2, -male_z/2 + base_thickness + 6])
+        // rotate([180,-90,0])
+        // serrated45_plane(0.5, 39, male_x);
         }
     }
     {
@@ -73,11 +73,11 @@ difference () {
     cylinder(r = mating_screw_pilot/2, h = 6, center = true);
     
     // mounting screws to base
-    translate([-male_x/4, male_y/2 - 3, -male_z/2 + base_thickness + 2])
+    translate([-male_x/4, male_y/2 - 3, -male_z/2 + base_thickness + 3])
     rotate([90,0,0])
     cylinder(r = mounting_screw_dia/2, h = 6, center = true);
         
-    translate([male_x/4, male_y/2 - 3, -male_z/2 + base_thickness + 2])
+    translate([male_x/4, male_y/2 - 3, -male_z/2 + base_thickness + 3])
     rotate([90,0,0])
     cylinder(r = mounting_screw_dia/2, h = 6, center = true);    
     }
