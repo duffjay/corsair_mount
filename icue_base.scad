@@ -29,10 +29,14 @@ x_offet = -20;
 // mount base to the case
 m3_pilot = 2.2;
 m3_dia = 3;
+m3_head_dia = 6;
+m3_head_depth = 3;
+m3_length = 12;
 
 // mount iCue to base
 m4_dia = 4;
 m4_pilot = 3.2;
+
 
 // screws 
 s1_x = 0;
